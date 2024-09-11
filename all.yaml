@@ -1,5 +1,5 @@
 ---
-- name: Update web servers
+- name: Make sure all the nodes are up-to-date with basic desired config
   hosts: annuals
   become: true
 
@@ -32,7 +32,15 @@
         - libffi-dev
         - liblzma-dev
 
-- name: Update all packages to their latest version
-  ansible.builtin.apt:
-    name: "*"
-    state: latest
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+
+  - name: cronboi
+    ansible.builtin.cron:
+      name: "cozibot once per week on Monday at 6 am"
+      weekday: "2"
+      hour: "12"
+      minute: "0"
+      job: /home/kat/dev/discord_bots/cozi.py
