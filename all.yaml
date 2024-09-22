@@ -40,7 +40,7 @@
   - name: cronboi
     ansible.builtin.cron:
       name: "cozibot once per week on Monday at 6 am"
-      weekday: "2"
+      weekday: "1"
       hour: "12"
       minute: "0"
       job: /home/kat/dev/discord_bots/cozi.py
