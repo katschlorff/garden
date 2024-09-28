@@ -1,6 +1,6 @@
 ---
 - name: Make sure all the nodes are up-to-date with basic desired config
-  hosts: annuals
+  hosts: all
   become: true
 
   tasks:
@@ -37,6 +37,11 @@
       name: "*"
       state: latest
 
+- name: annuals setup
+  hosts: annuals
+  become: true
+
+  tasks:
   - name: cronboi
     ansible.builtin.cron:
       name: "cozibot once per week on Monday at 6 am"
@@ -44,3 +49,4 @@
       hour: "12"
       minute: "0"
       job: /home/kat/dev/discord_bots/cozi.py
+
